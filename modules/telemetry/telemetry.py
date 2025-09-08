@@ -15,10 +15,10 @@ class TelemetryData:
     yaw_deg: float
 
 
-class ConnectionRecvInterface(Protocol):  
+class ConnectionRecvInterface(Protocol):
     def recv_match(
         self, blocking: bool = False, types: list[str] | None = None, timeout: float | None = None
-    ): ...
+    ) -> object | None: ...
 
 
 class Telemetry:

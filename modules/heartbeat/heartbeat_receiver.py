@@ -8,7 +8,7 @@ from modules.common.logger import Logger
 class ConnectionRecvInterface(Protocol):  # pragma: no cover - Protocol
     def recv_match(
         self, blocking: bool = False, types: list[str] | None = None, timeout: float | None = None
-    ): ...
+    ) -> object | None: ...
 
 
 class HeartbeatReceiver:

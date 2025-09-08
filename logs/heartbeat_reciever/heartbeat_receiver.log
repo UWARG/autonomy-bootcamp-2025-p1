@@ -1,0 +1,9 @@
+[heartbeat_receiver] INFO: Heartbeat received; transitioning to Connected
+[heartbeat_receiver] WARNING: Missed HEARTBEAT
+[heartbeat_receiver] WARNING: Missed HEARTBEAT
+[heartbeat_receiver] WARNING: Missed HEARTBEAT
+[heartbeat_receiver] WARNING: Missed HEARTBEAT
+[heartbeat_receiver] WARNING: Missed HEARTBEAT
+[heartbeat_receiver] WARNING: Missed 5 consecutive HEARTBEATs; transitioning to Disconnected
+[heartbeat_receiver] WARNING: Missed HEARTBEAT
+[heartbeat_receiver] INFO: States: ['Connected', 'Connected', 'Connected', 'Connected', 'Connected', 'Connected', 'Disconnected', 'Disconnected']

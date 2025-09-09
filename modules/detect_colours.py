@@ -59,8 +59,6 @@ class DetectBlue:
         cv2.imshow("mask", mask)
         cv2.waitKey(0)
 
-        # Shows the detected colour from the mask
-        res = cv2.bitwise_and(hsv, hsv, mask=mask)
 
         # ============
         # ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
@@ -134,8 +132,6 @@ class DetectRed:
         cv2.imshow("mask", final_mask)
         cv2.waitKey(0)
 
-        # Shows the detected colour from the mask
-        res = cv2.bitwise_and(hsv, hsv, mask=final_mask)
 
         # Annotate the colour detections
         # replace the '_' parameter with the appropiate variable

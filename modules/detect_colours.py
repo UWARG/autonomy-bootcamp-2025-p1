@@ -1,6 +1,4 @@
 """
-BOOTCAMPERS TO COMPLETE.
-
 Detects colours on a map of landing pads.
 """
 
@@ -8,147 +6,98 @@ from pathlib import Path
 import cv2
 import numpy as np
 
-# Bootcampers remove the following lines:
-# Allow linters and formatters to pass for bootcamp maintainers
-# pylint: disable=unused-argument,unused-variable,used-before-assignment
-
 
 class DetectBlue:
-    """
-    Detects blue objects from an image.
-    """
+    """Detects blue objects from an image."""
 
     __create_key = object()
 
     @classmethod
     def create(cls) -> "DetectBlue":
-        """
-        Factory method to create DetectBlue instance.
-        """
-
+        """Factory method to create DetectBlue instance."""
         return DetectBlue(cls.__create_key)
 
     def __init__(self, class_create_private_key: object) -> None:
-        """
-        Private constructor, use create() method.
-        """
-        assert class_create_private_key is DetectBlue.__create_key, "Use create() method"
+        """Private constructor, use create() method."""
+        if class_create_private_key is not DetectBlue.__create_key:
+            raise ValueError("Use create() method")
 
     def run(self, image: str, output_path: Path, return_mask: bool = False) -> None | np.ndarray:
         """
-        Detects blue from an image and shows the annotated result.
+        Detects blue from an image, annotates contours, and optionally returns the mask.
 
-        image: The image to run the colour detection algorithm on.
-        output_path: Path to output the resulting image with annotated detections.
-        return_mask: Option to return the mask (black and white version of colour detection).
+        Args:
+            image: Path to the input image.
+            output_path: Path to save the annotated output image.
+            return_mask: If True, returns the mask of detected blue areas.
+
+        Returns:
+            The mask if return_mask is True, else None.
         """
         img = cv2.imread(image)
+        hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
-        # ============
-        # ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
-        # ============
+        # Blue colour range in HSV
+        lower_blue = np.array([100, 150, 50])
+        upper_blue = np.array([140, 255, 255])
 
-        # Convert the image's colour to HSV
-        hsv = ...
+        mask = cv2.inRange(hsv, lower_blue, upper_blue)
+        _ = cv2.bitwise_and(img, img, mask=mask)  # Prevent unused variable warning
 
-        # Set upper and lower bounds for colour detection, this is in HSV
-        lower_blue = ...
-        upper_blue = ...
-
-        # Apply the threshold for the colour detection
-        mask = ...
-
-        # Shows the detected colour from the mask
-        res = ...
-
-        # ============
-        # ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
-        # ============
-
-        # Annotate the colour detections
         contours, _ = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
         cv2.drawContours(img, contours, -1, (0, 255, 0), 2)
-
-        # Show the annotated detection!
         cv2.imwrite(str(output_path), img)
 
-        # Show res to see the result of what is being filtered in the colour detection
-        # cv2.imwrite(str(output_path), res)
-
-        # This parameter is needed to run tests
-        return mask if return_mask else None
+        if return_mask:
+            return mask
+        return None
 
 
 class DetectRed:
-    """
-    Detects red objects from an image.
-    """
+    """Detects red objects from an image."""
 
     __create_key = object()
 
     @classmethod
     def create(cls) -> "DetectRed":
-        """
-        Factory method to create DetectRed instance.
-        """
-
+        """Factory method to create DetectRed instance."""
         return DetectRed(cls.__create_key)
 
     def __init__(self, class_create_private_key: object) -> None:
-        """
-        Private constructor, use create() method.
-        """
-        assert class_create_private_key is DetectRed.__create_key, "Use create() method"
+        """Private constructor, use create() method."""
+        if class_create_private_key is not DetectRed.__create_key:
+            raise ValueError("Use create() method")
 
     def run(self, image: str, output_path: Path, return_mask: bool = False) -> None | np.ndarray:
         """
-        Detects red from an image and shows the annotated result.
+        Detects red from an image, annotates contours, and optionally returns the mask.
 
-        image: The image to run the colour detection algorithm on.
-        output_path: Path to output the resulting image with annotated detections.
-        return_mask: Option to return the mask (black and white version of colour detection).
+        Args:
+            image: Path to the input image.
+            output_path: Path to save the annotated output image.
+            return_mask: If True, returns the mask of detected red areas.
+
+        Returns:
+            The mask if return_mask is True, else None.
         """
         img = cv2.imread(image)
+        hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
-        # ============
-        # ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
-        # ============
+        # Red colour range in HSV (wrap-around)
+        lower_red1 = np.array([0, 120, 70])
+        upper_red1 = np.array([10, 255, 255])
+        lower_red2 = np.array([170, 120, 70])
+        upper_red2 = np.array([180, 255, 255])
 
-        # Convert the image's colour to HSV
-        hsv = ...
+        mask1 = cv2.inRange(hsv, lower_red1, upper_red1)
+        mask2 = cv2.inRange(hsv, lower_red2, upper_red2)
+        mask = mask1 | mask2
+        _ = cv2.bitwise_and(img, img, mask=mask)  # Prevent unused variable warning
 
-        # Set upper and lower bounds for colour detection, this is in HSV
-        lower_red = ...
-        upper_red = ...
-
-        # Apply the threshold for the colour detection
-        mask = ...
-
-        # Shows the detected colour from the mask
-        res = ...
-
-        # Annotate the colour detections
-        # replace the '_' parameter with the appropiate variable
-        contours, _ = cv2.findContours(_, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-        # ============
-        # ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
-        # ============
-
+        contours, _ = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
         cv2.drawContours(img, contours, -1, (0, 255, 0), 2)
-
-        # Show the annotated detection!
         cv2.imwrite(str(output_path), img)
 
-        # Show res to see the result of what is being filtered in the colour detection
-        # cv2.imwrite(str(output_path), res)
-
-        # ============
-        # ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
-        # ============
-
-        # Include the "return_mask" parameter if statement here, similar to how it is implemented in DetectBlue
-        # Tests will not pass if this isn't included!
-
-        # ============
-        # ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
-        # ============
+        if return_mask:
+            return mask
+        return None

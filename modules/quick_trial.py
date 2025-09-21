@@ -7,7 +7,6 @@ import time
 
 from modules.detect_colours import DetectBlue, DetectRed
 
-
 # Output results of colour detections
 OUTPUT_PATH = pathlib.Path("Output")
 OUTPUT_PATH.mkdir(parents=True, exist_ok=True)

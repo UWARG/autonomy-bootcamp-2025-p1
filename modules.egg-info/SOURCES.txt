@@ -1,0 +1,11 @@
+README.md
+pyproject.toml
+setup.cfg
+modules/__init__.py
+modules/detect_colours.py
+modules/quick_trial.py
+modules.egg-info/PKG-INFO
+modules.egg-info/SOURCES.txt
+modules.egg-info/dependency_links.txt
+modules.egg-info/top_level.txt
+tests/test_detectcolours.py

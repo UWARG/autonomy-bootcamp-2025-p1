@@ -9,8 +9,6 @@ import cv2
 import numpy as np
 
 
-
-
 class DetectBlue:
     """
     Detects blue objects from an image.
@@ -54,11 +52,11 @@ class DetectBlue:
         upper_blue = np.array([140, 255, 255])
 
         # Apply the threshold for the colour detection
-        
+
         mask = cv2.inRange(hsv, lower_blue, upper_blue)
 
         # Shows the detected colour from the mask
-   
+
         res = cv2.bitwise_and(img, img, mask=mask)
 
         # ============
@@ -128,8 +126,7 @@ class DetectRed:
         # Apply the threshold for the colour detection
         mask_1 = cv2.inRange(hsv, lower_red_1, upper_red_1)
         mask_2 = cv2.inRange(hsv, lower_red_2, upper_red_2)
-        mask = mask_1 + mask_2 
-        
+        mask = mask_1 + mask_2
 
         # Shows the detected colour from the mask
         res = cv2.bitwise_and(img, img, mask=mask)

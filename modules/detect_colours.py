@@ -9,7 +9,6 @@ import cv2
 import numpy as np
 
 
-
 class DetectBlue:
     """
     Detects blue objects from an image.
@@ -49,14 +48,14 @@ class DetectBlue:
         hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
         # Set upper and lower bounds for colour detection, this is in HSV
-        lower_blue = np.array([95,70,55])
-        upper_blue = np.array([150,255,255])
+        lower_blue = np.array([95, 70, 55])
+        upper_blue = np.array([150, 255, 255])
 
         # Apply the threshold for the colour detection
         mask = cv2.inRange(hsv, lower_blue, upper_blue)
 
         # Shows the detected colour from the mask
-        res = cv2.bitwise_and(img,img, mask= mask)
+        res = cv2.bitwise_and(img, img, mask=mask)
 
         # ============
         # ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
@@ -112,11 +111,11 @@ class DetectRed:
         hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
         # Set upper and lower bounds for colour detection, this is in HSV
-        lower_red_one = np.array([0,100,100])
-        upper_red_one = np.array([10,255,255])
+        lower_red_one = np.array([0, 100, 100])
+        upper_red_one = np.array([10, 255, 255])
 
-        lower_red_two = np.array([175,100,100])
-        upper_red_two = np.array([180,255,255])
+        lower_red_two = np.array([175, 100, 100])
+        upper_red_two = np.array([180, 255, 255])
 
         # Apply the threshold for the colour detection
         mask_one = cv2.inRange(hsv, lower_red_one, upper_red_one)
@@ -124,7 +123,7 @@ class DetectRed:
         mask = cv2.bitwise_or(mask_one, mask_two)
 
         # Shows the detected colour from the mask
-        res = cv2.bitwise_and(img,img, mask= mask)
+        res = cv2.bitwise_and(img, img, mask=mask)
 
         # Annotate the colour detections
         # replace the '_' parameter with the appropiate variable

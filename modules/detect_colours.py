@@ -124,7 +124,6 @@ class DetectRed:
         mask = cv2.bitwise_or(mask1, mask2)
 
         # Shows the detected colour from the mask
-        
 
         # Annotate the colour detections
         # replace the '_' parameter with the appropiate variable

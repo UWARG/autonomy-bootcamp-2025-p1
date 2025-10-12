@@ -8,11 +8,6 @@ from pathlib import Path
 import cv2
 import numpy as np
 
-# Bootcampers remove the following lines:
-# Allow linters and formatters to pass for bootcamp maintainers
-# pylint: disable=unused-argument,unused-variable,used-before-assignment
-
-
 class DetectBlue:
     """
     Detects blue objects from an image.
@@ -73,7 +68,7 @@ class DetectBlue:
         cv2.imwrite(str(output_path), img)
 
         # Show res to see the result of what is being filtered in the colour detection
-        #cv2.imwrite(str(output_path), res)
+        # cv2.imwrite(str(output_path), res)
 
         # This parameter is needed to run tests
         return mask if return_mask else None

@@ -9,6 +9,6 @@ venv/
 # User testing code
 modules/Output/
 
-# MacOS Metadata
+# MacOS Metadata init
 .DS_Store
 ._*

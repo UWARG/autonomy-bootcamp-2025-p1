@@ -62,7 +62,7 @@ class DetectBlue:
         # ============
 
         # Annotate the colour detections
-        contours, hierarchy = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+        contours = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
         cv2.drawContours(img, contours, -1, (0, 255, 0), 2)
 
         # Show the annotated detection!
@@ -123,14 +123,14 @@ class DetectRed:
         # Apply the threshold for the colour detection
         mask = cv2.inRange(hsv, lower_red, upper_red)
         mask2 = cv2.inRange(hsv, lower_red2, upper_red2)
-        fullMask = cv2.bitwise_or(mask, mask2)
+        full_mask = cv2.bitwise_or(mask, mask2)
 
         # Shows the detected colour from the mask
-        res = cv2.bitwise_and(img, img, mask=mask)
+        # res = cv2.bitwise_and(img, img, mask=mask)
 
         # Annotate the colour detections
         # replace the '_' parameter with the appropiate variable
-        contours, hierarchy = cv2.findContours(fullMask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+        contours = cv2.findContours(full_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
         # ============
         # ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
         # ============

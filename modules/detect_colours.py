@@ -149,7 +149,7 @@ class DetectRed:
 
         # Include the "return_mask" parameter if statement here, similar to how it is implemented in DetectBlue
         # Tests will not pass if this isn't included!
-        return fullMask if return_mask else None
+        return full_mask if return_mask else None
 
         # ============
         # ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑

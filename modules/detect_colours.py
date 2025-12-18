@@ -10,6 +10,7 @@ import numpy as np
 
 # Bootcampers remove the following lines:
 
+
 class DetectBlue:
     """
     Detects blue objects from an image.
@@ -39,7 +40,7 @@ class DetectBlue:
         output_path: Path to output the resulting image with annotated detections.
         return_mask: Option to return the mask (black and white version of colour detection).
         """
-        img = cv2.imread(image) #create openCV image object 
+        img = cv2.imread(image)  # create openCV image object
 
         # ============
         # ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
@@ -56,7 +57,7 @@ class DetectBlue:
         mask = cv2.inRange(hsv, lower_blue, upper_blue)
 
         # Shows the detected colour from the mask
-        res = cv2.bitwise_and(img, img, mask= mask)
+        res = cv2.bitwise_and(img, img, mask=mask)
 
         # ============
         # ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
@@ -70,7 +71,7 @@ class DetectBlue:
         cv2.imwrite(str(output_path), img)
 
         # Show res to see the result of what is being filtered in the colour detection
-        #cv2.imwrite(str(output_path), res)
+        # cv2.imwrite(str(output_path), res)
 
         # This parameter is needed to run tests
         return mask if return_mask else None
@@ -121,23 +122,22 @@ class DetectRed:
         # Apply the threshold for the colour detection
         # mask = cv2.inRange(hsv, lower_red, upper_red)
 
-        #Lower red
+        # Lower red
         lower_red1 = np.array([0, 30, 30])
         upper_red1 = np.array([10, 255, 255])
 
-        #Upper red to include red at 180
+        # Upper red to include red at 180
         lower_red2 = np.array([170, 30, 30])
         upper_red2 = np.array([179, 255, 255])
 
         mask1 = cv2.inRange(hsv, lower_red1, upper_red1)
         mask2 = cv2.inRange(hsv, lower_red2, upper_red2)
 
-        #Combine the two masks
+        # Combine the two masks
         mask = mask1 + mask2
 
-
         # Shows the detected colour from the mask
-        res = cv2.bitwise_and(img, img, mask= mask)
+        res = cv2.bitwise_and(img, img, mask=mask)
 
         # Annotate the colour detections
         # replace the '_' parameter with the appropiate variable
@@ -152,7 +152,7 @@ class DetectRed:
         cv2.imwrite(str(output_path), img)
 
         # Show res to see the result of what is being filtered in the colour detection
-        #cv2.imwrite(str(output_path), res)
+        # cv2.imwrite(str(output_path), res)
 
         # ============
         # ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓

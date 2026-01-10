@@ -8,6 +8,7 @@ from pathlib import Path
 import cv2
 import numpy as np
 
+
 class DetectBlue:
     """
     Detects blue objects from an image.
@@ -48,7 +49,7 @@ class DetectBlue:
 
         # Set upper and lower bounds for colour detection, this is in HSV
         lower_blue = np.array([90, 110, 55])
-        upper_blue = np.array([120, 255, 255])  
+        upper_blue = np.array([120, 255, 255])
 
         # Apply the threshold for the colour detection
         mask = cv2.inRange(hsv, lower_blue, upper_blue)

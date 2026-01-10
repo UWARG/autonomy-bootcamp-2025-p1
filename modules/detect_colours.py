@@ -125,9 +125,6 @@ class DetectRed:
         mask2 = cv2.inRange(hsv, lower_red2, upper_red2)
         mask = cv2.bitwise_or(mask1, mask2)
 
-        # Shows the detected colour from the mask
-        res = cv2.bitwise_and(img, img, mask=mask)
-
         # Annotate the colour detections
         contours, _ = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
         # ============
@@ -138,9 +135,6 @@ class DetectRed:
 
         # Show the annotated detection!
         cv2.imwrite(str(output_path), img)
-
-        # Show res to see the result of what is being filtered in the colour detection
-        # cv2.imwrite(str(output_path), res)
 
         # ============
         # ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓

@@ -9,7 +9,6 @@ import cv2
 import numpy as np
 
 
-
 class DetectBlue:
     """
     Detects blue objects from an image.
@@ -112,21 +111,25 @@ class DetectRed:
         # ============
 
         # Convert the image's colour to HSV
-        hsv = ...
+        hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
         # Set upper and lower bounds for colour detection, this is in HSV
-        lower_red = ...
-        upper_red = ...
+        lower_red1 = np.array([170, 150, 80])
+        upper_red1 = np.array([179, 255, 255])
+        lower_red2 = np.array([0, 150, 80])
+        upper_red2 = np.array([10, 255, 255])
 
         # Apply the threshold for the colour detection
-        mask = ...
+        mask1 = cv2.inRange(hsv, lower_red1, upper_red1)
+        mask2 = cv2.inRange(hsv, lower_red2, upper_red2)
+        mask = mask1 | mask2
 
         # Shows the detected colour from the mask
-        res = ...
+        res = cv2.bitwise_and(img, img, mask=mask)
 
         # Annotate the colour detections
         # replace the '_' parameter with the appropiate variable
-        contours, _ = cv2.findContours(_, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+        contours, _ = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
         # ============
         # ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
         # ============
@@ -137,7 +140,7 @@ class DetectRed:
         cv2.imwrite(str(output_path), img)
 
         # Show res to see the result of what is being filtered in the colour detection
-        # cv2.imwrite(str(output_path), res)
+        cv2.imwrite(str(output_path), res)
 
         # ============
         # ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
@@ -145,6 +148,7 @@ class DetectRed:
 
         # Include the "return_mask" parameter if statement here, similar to how it is implemented in DetectBlue
         # Tests will not pass if this isn't included!
+        return mask if return_mask else None
 
         # ============
         # ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑

@@ -8,6 +8,7 @@ from pathlib import Path
 import cv2
 import numpy as np
 
+
 class DetectBlue:
     """
     Detects blue objects from an image.
@@ -46,7 +47,8 @@ class DetectBlue:
         # Convert the image's colour to HSV
         if img is not None:
             hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-        else: return None
+        else:
+            return None
 
         # Set upper and lower bounds for colour detection, this is in HSV
         lower_blue = np.array([100, 150, 50])
@@ -55,8 +57,7 @@ class DetectBlue:
         # Apply the threshold for the colour detection
         mask = cv2.inRange(hsv, lower_blue, upper_blue)
 
-        # Shows the detected colour from the mask
-        res = cv2.bitwise_and(img, img, mask=mask)
+       
 
         # ============
         # ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
@@ -114,7 +115,8 @@ class DetectRed:
         # Convert the image's colour to HSV
         if img is not None:
             hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-        else: return None
+        else:
+            return None
 
         # Set upper and lower bounds for colour detection, this is in HSV
         lower_red_1 = np.array([0, 50, 50])
@@ -128,11 +130,12 @@ class DetectRed:
 
         # Shows the detected colour from the mask
         res1 = cv2.bitwise_and(img, img, mask=mask1)
-        res2 = cv2.bitwise_and(img, img, mask=mask2)
 
         # Annotate the colour detections
         # replace the '_' parameter with the appropiate variable
-        contours, _ = cv2.findContours(cv2.bitwise_or(mask1, mask2), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+        contours, _ = cv2.findContours(
+            cv2.bitwise_or(mask1, mask2), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE
+        )
         # ============
         # ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
         # ============
@@ -153,8 +156,7 @@ class DetectRed:
         # Tests will not pass if this isn't included!
         if return_mask:
             return cv2.bitwise_or(mask1, mask2)
-        else: 
-            return None
+        return None
 
         # ============
         # ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑

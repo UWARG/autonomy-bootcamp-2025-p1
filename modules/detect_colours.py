@@ -140,7 +140,7 @@ class DetectRed:
         cv2.imwrite(str(output_path), img)
 
         # Show res to see the result of what is being filtered in the colour detection
-        # cv2.imwrite(str(output_path), res)
+        cv2.imwrite(str(output_path), res)
 
         # ============
         # ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓

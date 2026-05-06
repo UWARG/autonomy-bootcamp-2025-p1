@@ -5,7 +5,7 @@ Runs colour detection on sample image.
 import pathlib
 import time
 
-from modules.detect_colours import DetectBlue, DetectRed
+from detect_colours import DetectBlue, DetectRed
 
 
 # Output results of colour detections

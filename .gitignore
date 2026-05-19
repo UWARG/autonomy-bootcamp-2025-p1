@@ -12,3 +12,5 @@ modules/Output/
 # MacOS Metadata
 .DS_Store
 ._*
+
+.venv/

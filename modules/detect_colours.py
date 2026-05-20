@@ -8,10 +8,6 @@ from pathlib import Path
 import cv2
 import numpy as np
 
-# Bootcampers remove the following lines:
-# Allow linters and formatters to pass for bootcamp maintainers
-# pylint: disable=unused-argument,unused-variable,used-before-assignment
-
 
 class DetectBlue:
     """

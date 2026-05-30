@@ -1,3 +1,5 @@
+set -euo pipefail 
+
 #!/bin/bash
 
 # Initialize and update submodules script for Linux

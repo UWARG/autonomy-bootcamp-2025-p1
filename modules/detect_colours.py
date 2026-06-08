@@ -116,11 +116,15 @@ class DetectRed:
         hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
         # Set upper and lower bounds for colour detection, this is in HSV
-        lower_red = np.array([0, 140, 0])
-        upper_red = np.array([60, 255, 200])
+        lower_red1 = np.array([0, 140, 0])
+        upper_red1 = np.array([60, 255, 200])
+
+        lower_red2 = np.array([160, 140, 0])
+        upper_red2 = np.array([180, 255, 200])
 
         # Apply the threshold for the colour detection
-        mask = mask = cv2.inRange(hsv, lower_red, upper_red)
+        mask = cv2.inRange(hsv, lower_red1, upper_red1)
+        mask = cv2.bitwise_or(mask, cv2.inRange(hsv, lower_red2, upper_red2))
 
         # Shows the detected colour from the mask
         res = cv2.bitwise_and(img, img, mask=mask)
@@ -144,6 +148,7 @@ class DetectRed:
         # ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
         # ============
 
+        return mask if return_mask else None
         # Include the "return_mask" parameter if statement here, similar to how it is implemented in DetectBlue
         # Tests will not pass if this isn't included!
 

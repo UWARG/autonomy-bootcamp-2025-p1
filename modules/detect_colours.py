@@ -11,7 +11,6 @@ import numpy as np
 # Bootcampers remove the following lines:
 
 
-
 class DetectBlue:
     """
     Detects blue objects from an image.
@@ -51,14 +50,14 @@ class DetectBlue:
         hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
         # Set upper and lower bounds for colour detection, this is in HSV
-        lower_blue = np.array([90,100,0])
-        upper_blue = np.array([130,255,255])
+        lower_blue = np.array([90, 100, 0])
+        upper_blue = np.array([130, 255, 255])
 
         # Apply the threshold for the colour detection
         mask = cv2.inRange(hsv, lower_blue, upper_blue)
 
         # Shows the detected colour from the mask
-        res = cv2.bitwise_and(img,img, mask= mask)
+        res = cv2.bitwise_and(img, img, mask=mask)
 
         # ============
         # ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
@@ -124,7 +123,7 @@ class DetectRed:
         mask = mask = cv2.inRange(hsv, lower_red, upper_red)
 
         # Shows the detected colour from the mask
-        res = cv2.bitwise_and(img,img, mask= mask)
+        res = cv2.bitwise_and(img, img, mask=mask)
 
         # Annotate the colour detections
         # replace the '_' parameter with the appropiate variable

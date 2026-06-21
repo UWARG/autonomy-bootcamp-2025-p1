@@ -120,15 +120,18 @@ class DetectRed:
         hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
         # Set upper and lower bounds for colour detection, this is in HSV.
-        red_bgr = np.array([[[0, 0, 255]]], dtype=np.uint8)
-        red_hsv = cv2.cvtColor(red_bgr, cv2.COLOR_BGR2HSV)
-        red_hue = int(red_hsv[0, 0, 0])
-
-        lower_red = np.array([red_hue - 10, 100, 100], dtype=np.uint8)
-        upper_red = np.array([red_hue + 10, 255, 255], dtype=np.uint8)
+        # Shades of red spans two discontinuous parts of the range of HSV
+        # The shades which are 0 < hue < 90, we designate as "red"
+        lower_red = np.array([0, 100, 0], dtype=np.uint8)
+        upper_red = np.array([30, 255, 255], dtype=np.uint8)
+        # The shades which are 90 < hue < 180, we designate as "magenta"
+        lower_magenta = np.array([150, 100, 0], dtype=np.uint8)
+        upper_magenta = np.array([180, 255, 255], dtype=np.uint8)
 
         # Apply the threshold for the colour detection
-        mask = cv2.inRange(hsv, lower_red, upper_red)
+        mask1 = cv2.inRange(hsv, lower_red, upper_red)
+        mask2 = cv2.inRange(hsv, lower_magenta, upper_magenta)
+        mask = mask1 + mask2
 
         # Shows the detected colour from the mask
         res = cv2.bitwise_and(hsv, hsv, mask=mask)
